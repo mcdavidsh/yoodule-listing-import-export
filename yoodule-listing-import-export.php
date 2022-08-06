@@ -139,8 +139,8 @@ function test_form(){
 
                     <input type="hidden" id="mphb-checkout-nonce" name="mphb-checkout-nonce" value="7e79d0d258"><input type="hidden" name="_wp_http_referer" value="/booking-confirmation/">
                     <input type="hidden" name="mphb-booking-checkout-id" value="683e0d58e439468d81a70ae400065b7c">
-                    <input type="hidden" name="mphb_check_in_date" value="2022-08-06">
-                    <input type="hidden" name="mphb_check_out_date" value="2022-08-08">
+                    <input type="hidden" name="mphb_check_in_date" value="2022-08-15">
+                    <input type="hidden" name="mphb_check_out_date" value="2022-08-20">
                     <input type="hidden" name="mphb_checkout_step" value="booking">
 
                     <section id="mphb-booking-details" class="mphb-booking-details mphb-checkout-section">

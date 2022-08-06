@@ -219,11 +219,10 @@ class YooduleListImportExport extends options
 
 
     {
-        $req = $_POST;
-        if (isset($req['action']) && isset($req['check_out_data'])) {
+        if (isset($_POST['action']) && isset($_POST['check_out_data'])) {
 
 //            reservation-received/?payment_id=861&payment_key=payment_861_62edb16e214c66.40970860&mphb_payment_status=mphb-p-on-hold
-
+            $req = $_POST['check_out_data'];
 
 //            $authKey = mphb_generate_uid();
             $data = array(
@@ -233,16 +232,17 @@ class YooduleListImportExport extends options
                 "mphb_check_in_date" => $req["mphb_check_in_date"],
                 "mphb_check_out_date" => $req["mphb_check_out_date"],
                 "mphb_checkout_step" => $req["mphb_checkout_step"],
-                "mphb_room_details" => [
-                    "room_type_id" => $req["room_type_id"],
-                    "adults" => $req["adults"],
-                    "children" => $req["children"],
-                    "guest_name" => $req["guest_name"],
-                    "rate_id" => $req["323"],
-                    "services" => [
+                "mphb_room_details[0" =>
+                    [
+                        "room_type_id" => $req["room_type_id"],
                         "adults" => $req["adults"],
-                        "quantity" => $req["quantity"]
-                    ]
+                        "children" => $req["children"],
+                        "guest_name" => $req["guest_name"],
+                        "rate_id" => $req["323"],
+                        "services" => [
+                            "adults" => $req["adults"],
+                            "quantity" => $req["quantity"]
+                        ]
                 ],
                 "mphb_applied_coupon_code" => $req["mphb_applied_coupon_code"],
                 "mphb_coupon_code" => $req["mphb_coupon_code"],
@@ -257,25 +257,27 @@ class YooduleListImportExport extends options
             );
 
             $param =[
-//                "id" => 0,
-//                "accountId" => 0,
-                "adults" => 2,
-//                "areaId" => 3,
-                "arrivalDate" => "2022-08-15",
+                "id" => 0,
+                "accountId" => 1,
+                "adults" => $req["mphb_room_details[0"]["adults"],
+                "areaId" => 110,
+                "bookerContactId"=> 4,
+    "bookingSourceId"=> 0,
+    "bookingSourceName"=> "Online",
+                "arrivalDate" => $req["mphb_check_in_date"],
 //                "baseRateOverride" => 0,
-//                "bookingSourceId" => "AirB&B",
-                "categoryId" => 1,
-                "children" => 1,
+                "categoryId"=> 9,
+                "children" => $req["mphb_room_details"]["children"],
 //                "companyId" => 5,
-                "departureDate" => "2022-08-20",
+                "departureDate" => $req["mphb_check_out_date"],
                 "discountId" => 22,
                 "groupAllotmentId" => 0,
                 "groupReservationId" => 0,
                 "guestId" => 134541,
-                "infants" => 1,
-//                "notes" => "This is a note about my reservation",
-//                "onlineConfirmationId" => 12986985,
-//                "otaNotes" => "This is a note from an OTA or Website",
+                "infants" =>  $req["mphb_room_details[0"]["children"],
+                    "notes" => $data["mphb_note"],
+//                    "onlineConfirmationId" => $data["mphb-checkout-nonce"],
+//                    "otaNotes" => $data["mphb_note"],
 //                "otaRef1" => "V5986985s9",
 //                "otaRef2" => "BCOM-8976958",
 //                "otaRef3" => "89869858896",
@@ -283,11 +285,11 @@ class YooduleListImportExport extends options
 //                "resTypeId" => 0,
                 "status" => "Confirmed",
 //                "subMarketSegmentId" => 5,
-//                "userDefined1" => "String 50",
-//                "userDefined2" => "String 20",
-//                "userDefined3" => "String 20",
-//                "userDefined4" => "String 20",
-//                "userDefined5" => "String 20",
+                "userDefined1" => $data["mphb_email"],
+                    "userDefined2" => $data["mphb_last_name"],
+                    "userDefined3" =>$data["mphb_first_name"]  ,
+                    "userDefined4" => $data["mphb_phone"],
+                    "userDefined5" => $data["mphb_country"],
 //                "userDefined6" => "String 20",
 //                "userDefined7" => "String 20",
 //                "userDefined8" => "String 20",
@@ -303,62 +305,15 @@ class YooduleListImportExport extends options
             ];
 
 
-//                [
-//                    "id" => $data["mphb-checkout-nonce"],
-//                    "accountId" => 0,
-//                    "adults" => $data["mphb_room_details"]["adults"],
-//                    "areaId" => 3,
-//                    "arrivalDate" => $data["mphb_check_in_date"],
-//                    "baseRateOverride" => 0,
-//                    "bookingSourceId" => 2,
-//                    "categoryId" => 1,
-//                    "children" => $data["mphb_room_details"]["children"],
-//                    "companyId" => 5,
-//                    "departureDate" => $data["mphb_check_out_date"],
-//                    "discountId" => 22,
-//                    "groupAllotmentId" => 0,
-//                    "groupReservationId" => 0,
-//                    "guestId" =>$data["mphb-checkout-nonce"],
-//                    "infants" =>  $data["mphb_room_details"]["children"],
-//                    "notes" => $data["mphb_note"],
-//                    "onlineConfirmationId" => $data["mphb-checkout-nonce"],
-//                    "otaNotes" => $data["mphb_note"],
-//                    "otaRef1" => "mdmd",
-//                    "otaRef2" => "dmd",
-//                    "otaRef3" => "ndd",
-//                    "rateTypeId" => 1,
-//                    "resTypeId" => 0,
-//                    "status" => "Confirmed",
-//                    "subMarketSegmentId" => 5,
-//                    "userDefined1" => $data["mphb_first_name"],
-//                    "userDefined2" => $data["mphb_last_name"],
-//                    "userDefined3" => $data["mphb_email"],
-//                    "userDefined4" => $data["mphb_phone"],
-//                    "userDefined5" => $data["mphb_country"],
-////                    "userDefined6" => "String 20",
-//                    "userDefined7" => "String 20",
-//                    "userDefined8" => "String 20",
-//                    "userDefined9" => "String 20",
-//                    "userDefined10" => "String 50",
-//                    "userDefined11" => true,
-//                    "userDefined12" => true,
-//                    "userDefined13" => true,
-//                    "userDefined14" => "2016-08-29 09:25:00",
-//                    "userDefined15" => "-08-29 09:25:00",
-//                    "travelAgentId" => 1,
-//                    "voucherId" => "kdd",
-//                ];
-
-
-
-
-
             $result = $this->curl_remote_post($this->endpoint.'reservations?ignoreMandatoryFieldWarnings=true',$param,$this->token);
 
-
             wp_send_json($result);
-
         }
+
+
+    }
+
+    function process_booking_form(){
 
     }
 
