@@ -1,0 +1,262 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+/**
+ * Plugin Name: MotoPress Hotel Booking Plugin Addon
+ * Plugin URI: https://github.com/mcdavidsh/htb-addon
+ * Description: An addon for hotel booking plugin by motopress, that extends functionality,
+ * Version: 1.0
+ * Author: Mcdavid Obioha
+ * Author URI: https://github.com/mcdavidsh
+ * Text Domain: htb-addon
+ **/
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+* {
+    box-sizing: border-box;
+}
+html, body{
+    background-color: #fafafa !important;
+}
+
+
+.mphb-reservation-cart {
+
+    display: none !important;
+}
+
+.mphb-recommendation {
+    display: none !important;
+}
+
+/*Wrapper*/
+.mphb_sc_search_results-wrapper {
+    display: flex;
+    font-family: 'Poppins', serif;
+    flex-flow: column wrap;
+    width: border-box;
+    padding: 30px;
+    background-color: #fafafa;
+}
+
+
+/*Box*/
+.mphb_sc_search_results-wrapper .mphb-room-type {
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    padding: 20px;
+}
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-room-type-title {
+    font-weight: 500;
+    font-size: 3.5rem;
+    padding-left: 10px;
+}
+
+/*Images*/
+.mphb-room-type-gallery-wrapper  {
+
+}
+
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-room-type-images {
+    width: 50%;
+    flex-basis: 40%;
+}
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-room-type-images img{
+    transition: all 0.4s ease-out 0s !important;
+}
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-gallery-thumbnail-slider{
+    display:none;
+}
+
+/*Description*/
+
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-room-type-details-title{
+    display: none;
+}
+.mphb-room-type p:nth-child(3) {
+    padding: 10px;
+    text-align: left;
+    width: 50%;
+    position: absolute;
+    top: 220px;
+    bottom: 0;
+    right: 90px;
+    left: auto;
+    height: 20%;
+    min-height: auto;
+    clear: both;
+}
+
+/*Price*/
+.mphb-room-type  .mphb-regular-price {
+    /*position: relative !important;*/
+    /*top:270px;*/
+    text-align:center;
+    display: flex;
+    flex-flow: column;
+    height: 200px;
+    /*left: 10px;*/
+    /*right: 140px;*/
+    /*bottom: 0;*/
+    /*z-index: 99;*/
+}
+.mphb-room-type .mphb-price {
+    font-size:40px;
+    font-weight:700;
+    color:#bead8e;
+    line-height:1;
+}
+
+
+/*Amenities*/
+
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-loop-room-type-attributes {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    list-style-type: none !important;
+}.mphb_sc_search_results-wrapper .mphb-room-type ul.mphb-loop-room-type-attributes {
+
+     font-size: 16px;
+     font-weight: 400;
+     padding: 40px 0 0 0 !important;
+     list-style: none;
+ }
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-loop-room-type-attributes li {
+    line-height: 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}.mphb_sc_search_results-wrapper .mphb-room-type .mphb-loop-room-type-attributes li::before {
+     margin-right: 10px;
+     content: "";
+     position: relative;
+     list-style-type: none !important;
+     left: 0;
+     right: 0;
+ }
+
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-room-type-promo {
+    font-weight: 400;
+    padding: 10px 0 0 0;
+    word-spacing: 10px;
+    list-style-type: none !important;
+}
+
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-room-type-promo .mphb-room-type-custom-attribute::before{
+    margin-right: 10px;
+    content: "";
+    position: relative;
+    left: 0;
+    right: 0;
+
+}
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-room-type-neighborhood .mphb-room-type-custom-attribute {
+    font-weight: 400;
+    padding: 10px 0 0 0;
+    word-spacing: 10px;
+    list-style-type: none !important;
+    line-height: 20px;
+}
+
+/*View details*/
+.mphb-room-type .mphb-view-details-button-wrapper {
+    position: absolute;
+}
+/*Reserve*/
+
+.mphb_sc_search_results-wrapper .mphb-room-type .mphb-reserve-room-section {
+
+    float: right;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    text-align: center;
+    width: 20%;
+    left: 650px;
+}
+
+/*Mobile devices*/
+
+/* For Desktop View */
+@media screen and (min-width: 1024px) {
+
+}
+
+/* For Tablet View */
+@media screen and (min-device-width: 768px)
+and (max-device-width: 1024px) {
+    .gfg-div {
+        width: 400px;
+        height: 400px;
+        background-color: orange;
+        color: black;
+    }
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 480px)
+and (orientation: portrait) {
+    .gfg-div {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        color: #fff;
+    }
+}
+
+/* For Mobile Landscape View */
+@media screen and (max-device-width: 640px)
+and (orientation: landscape) {
+    .gfg-div {
+        width: 400px;
+        height: 200px;
+        background-color: cyan;
+        color: black;
+    }
+}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+    .gfg-div {
+        width: 400px;
+        height: 200px;
+        background-color: chartreuse;
+        color: black;
+    }
+}
+
+/* For iPhone 4 Portrait or Landscape View */
+@media screen and (min-device-width: 320px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .gfg-div {
+        width: 400px;
+        height: 400px;
+        background-color: brown;
+        color: black;
+    }
+}
+
+/* For iPhone 5 Portrait or Landscape View */
+@media (device-height: 568px) and (device-width: 320px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .gfg-div {
+        width: 400px;
+        height: 400px;
+        background-color: cornflowerblue;
+        color: black;
+    }
+}
+
+/* For iPhone 6 and 6 plus Portrait or Landscape View */
+@media (min-device-height: 667px) and (min-device-width: 375px)
+and (-webkit-min-device-pixel-ratio: 3) {
+    .gfg-div {
+        width: 400px;
+        height: 400px;
+        background-color: darkgoldenrod;
+        color: black;
+    }
+}
