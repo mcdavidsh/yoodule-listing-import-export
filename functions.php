@@ -260,7 +260,7 @@ class YooduleListImportExport extends options
                 "id" => 0,
                 "accountId" => 1,
                 "adults" => $req["mphb_room_details[0"]["adults"],
-                "areaId" => 110,
+                "areaId" => 111,
                 "bookerContactId"=> 4,
     "bookingSourceId"=> 0,
     "bookingSourceName"=> "Online",

@@ -27,6 +27,7 @@ jQuery(document).ready( ()=> {
             if (cf === "Confirmed") {
                 alert("Reservation Book Successfully")
                 e.returnValue = true
+
             }else if (response.status === "Unconfirmed"){
                 alert("Reservation Book Unconfirmed")
                 e.preventDefault()

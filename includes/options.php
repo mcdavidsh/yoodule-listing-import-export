@@ -13,7 +13,7 @@ class options
     protected $useTrainingDatabase = "rms_use_training_database";
     protected $moduleType = "module_type";
     protected $endpoint = "https://restapi8.rmscloud.com/";
-    protected $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2lkIjoiMTUiLCJjbGlkIjoiMTEyODEiLCJuYmYiOjE2NTk3MDQwOTgsImV4cCI6MTY1OTc5MDQ5OCwiaWF0IjoxNjU5NzA0MDk4LCJpc3MiOiJ3d3cucm1zY2xvdWQuY29tIn0.yKLxgXWaV99zDCGVARdY9-tgukgZqwWd_a0UPiG22Yc";
+    protected $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2lkIjoiMTUiLCJjbGlkIjoiMTEyODEiLCJuYmYiOjE2NTk3OTM2MDYsImV4cCI6MTY1OTg4MDAwNiwiaWF0IjoxNjU5NzkzNjA2LCJpc3MiOiJ3d3cucm1zY2xvdWQuY29tIn0.jSmqZPqOxFGBrmN3aHo7elusHh_3kecLM7yVIw9tF6U";
     public $live_id = 612;
     public $live_password = "Q3IPf7IPk0EdKfD";
     public $moduleType_live = "distribution";
