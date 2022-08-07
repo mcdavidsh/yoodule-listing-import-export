@@ -5,38 +5,63 @@ const formSerialize = (formselector) => {
     return Object.assign(...Array.from(forment, ([x, y]) => ({[x]: y})))
 }
 
+const basename = (path) => {
+    return path.split("/").reverse()[1]
+}
+function serializeObject(obj) {
+    var jsn = {};
+    $.each(obj, function() {
+        if (jsn[this.name]) {
+            if (!jsn[this.name].push) {
+                jsn[this.name] = [jsn[this.name]];
+            }
+            jsn[this.name].push(this.value || '');
+        } else {
+            jsn[this.name] = this.value || '';
+        }
+    });
+    return jsn;
+};
+
 let $=jQuery;
 
+
+
 jQuery(document).ready( ()=> {
-    $(document).on('submit','.mphb_sc_checkout-form',(e)=> {
-        let formData = formSerialize('.mphb_sc_checkout-form')
 
-        $.ajax({
-            url:"/wp-admin/admin-ajax.php",
-            method:'POST',
-            data: {action:'post_booking', check_out_data:formData},
-            dataType:'json',
-            async: false,
-            beforeSend:(()=> {
-                console.log("Please wait")
-            })
-        }).done((resp)=> {
-            let response = JSON.parse(resp)
-            console.log(response)
-            let cf ="Confirmed";
-            if (cf === "Confirmed") {
-                alert("Reservation Book Successfully")
-                e.returnValue = true
+    if (basename(window.location.href) === "booking-confirmation" ) {
+        alert(basename(window.location.href))
+        $('.button').on('click', (e) => {
+          let data =  $("form").serializeArray();
+            let formData = serializeObject(data)
+            console.log(formData)
+            $.ajax({
+                    url: "/wp-admin/admin-ajax.php",
+                    method: 'POST',
+                    data: {action: 'post_booking', check_out_data: formData},
+                    dataType: 'json',
+                    async: false,
+                    beforeSend: (() => {
+                        console.log("Please wait")
+                    })
+                }).done((resp) => {
+                    let response = JSON.parse(resp)
+                    console.log(response)
+                    let cf = "Confirmed";
+                    if (response.status  === "Confirmed") {
+                        alert("Reservation Book Successfully")
+                        e.returnValue = true
 
-            }else if (response.status === "Unconfirmed"){
-                alert("Reservation Book Unconfirmed")
-                e.preventDefault()
-            }else {
-                alert("Reservation Book Failed")
-                e.preventDefault()
-            }
+                    } else if (response.status === "Unconfirmed") {
+                        alert("Reservation Book Unconfirmed")
+                        e.preventDefault()
+                    } else {
+                        alert("Reservation Book Failed")
+                        e.preventDefault()
+                    }
+                })
+
         })
-
-    })
+    }
 
 })

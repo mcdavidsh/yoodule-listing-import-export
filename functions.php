@@ -36,7 +36,6 @@ class YooduleListImportExport extends options
 
     function update_accomodation_type()
     {
-//
         global $wpdb;
 
         $key = "mphb_room";
@@ -219,8 +218,12 @@ class YooduleListImportExport extends options
 
 
     {
-        if (isset($_POST['action']) && isset($_POST['check_out_data'])) {
 
+
+
+//        if (isset($_POST['action']) && isset($_POST['check_out_data'])) {
+        if ($_SERVER['REQUEST_METHOD'] ==='POST' && basename($_SERVER['REQUEST_URI']) === 'booking-confirmation' ) {
+            echo basename($_SERVER['REQUEST_URI']);
 //            reservation-received/?payment_id=861&payment_key=payment_861_62edb16e214c66.40970860&mphb_payment_status=mphb-p-on-hold
             $req = $_POST['check_out_data'];
 
@@ -307,15 +310,17 @@ class YooduleListImportExport extends options
 
             $result = $this->curl_remote_post($this->endpoint.'reservations?ignoreMandatoryFieldWarnings=true',$param,$this->token);
 
-            wp_send_json($result);
+//            wp_send_json($result);
+
+            if (isset($_POST['submit'])) {
+
+                return false;
+            }
         }
 
 
     }
 
-    function process_booking_form(){
-
-    }
 
 }
 
@@ -329,4 +334,3 @@ add_action('init', [$yt, 'post_booking']);
 
 add_action('wp_ajax_post_booking', [$yt, 'post_booking']); //logged in
 add_action('wp_ajax_no_priv_post_booking',[$yt, 'post_booking']); //not logged in
-//add_action('init', [$yt, 'update_accomodation_type']);
