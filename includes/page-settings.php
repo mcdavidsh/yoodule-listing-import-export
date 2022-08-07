@@ -4,47 +4,62 @@
 
 
 
-if( !function_exists("yoodule_settings") ) {
 
-	function yoodule_settings(){
-		?>
-<h1>Yoodule Plugin Settings</h1>
-		<div class="yd-container">
+if( !function_exists("yoodule_sub_manage") ) {
 
-	<form method="post">
+ function yoodule_sub_manage(){
 
-        <div class="input-row">
-            <label >RMS Cloud Credentials</label>
-        <input type="text" name="stripe-secret" value="<?php echo get_option("stripe_api_secret");?>" class="regular-text yd-form-input" placeholder="Enter Stripe Api Secret">
-        </div>
-        <div>
-        <label >stripe API Client</label>
+ }
 
-        <input type="text" name="stripe-client" value="<?php echo get_option("stripe_api_client");?>" class="regular-text" placeholder="Enter Stripe Client ID">
-        </div>
-        <div>
-        <input class="button-primary" type="submit" name="submit" value="<?php esc_attr_e( 'Submit' ); ?>" />
-        </div>
-    </form>
-		</div>
-<?php
-	}
-	if (isset($_POST["submit"])){
+}
 
-		$secret = $_POST["stripe-secret"];
-		$client = $_POST["stripe-client"];
 
-        if (!get_option("stripe_api_stripe") && !get_option("stripe_api_client")){
-	        add_option( 'stripe_api_client' , $client , '' , 'no');
-	        add_option( 'stripe_api_secret' , $secret , '' , 'no');
-	        add_action('admin_notices', 'insert_notice');
-        }else {
-	        update_option( 'stripe_api_client' , $client );
-	        update_option( 'stripe_api_secret' , $secret );
-	        add_action('admin_notices', 'update_notice');
+
+    if( !function_exists("yoodule_settings") ) {
+
+        function yoodule_settings(){
+            if ( !current_user_can( 'manage_options' ) )  {
+                wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+            }
+            ?>
+            <h1>Yoodule Plugin Settings</h1>
+            <div class="yd-container">
+
+                <form method="post">
+
+                    <div class="input-row">
+                        <label >RMS Cloud Credentials</label>
+                        <input type="text" name="stripe-secret" value="<?php echo get_option("stripe_api_secret");?>" class="regular-text yd-form-input" placeholder="Enter Stripe Api Secret">
+                    </div>
+                    <div>
+                        <label >stripe API Client</label>
+
+                        <input type="text" name="stripe-client" value="<?php echo get_option("stripe_api_client");?>" class="regular-text" placeholder="Enter Stripe Client ID">
+                    </div>
+                    <div>
+                        <input class="button-primary" type="submit" name="submit" value="<?php esc_attr_e( 'Submit' ); ?>" />
+                    </div>
+                </form>
+            </div>
+            <?php
+        }
+        if (isset($_POST["submit"])){
+
+            $secret = $_POST["stripe-secret"];
+            $client = $_POST["stripe-client"];
+
+            if (!get_option("stripe_api_stripe") && !get_option("stripe_api_client")){
+                add_option( 'stripe_api_client' , $client , '' , 'no');
+                add_option( 'stripe_api_secret' , $secret , '' , 'no');
+                add_action('admin_notices', 'insert_notice');
+            }else {
+                update_option( 'stripe_api_client' , $client );
+                update_option( 'stripe_api_secret' , $secret );
+                add_action('admin_notices', 'update_notice');
+            }
+
         }
 
-	}
 
 
 }

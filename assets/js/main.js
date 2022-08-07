@@ -30,7 +30,6 @@ let $=jQuery;
 jQuery(document).ready( ()=> {
 
     if (basename(window.location.href) === "booking-confirmation" ) {
-        alert(basename(window.location.href))
         $('.button').on('click', (e) => {
           let data =  $("form").serializeArray();
             let formData = serializeObject(data)

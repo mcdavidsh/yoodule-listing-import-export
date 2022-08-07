@@ -141,6 +141,31 @@ class YooduleListImportExport extends options
 
     }
 
+    function get_areas(){
+        $para = `areas?limit=100&modelType=basic&offset=0&propertyId=1`;
+    }
+
+    function available_facilities(){
+        $body = [
+            "adults" => 2,
+            "agentId" => 1,
+            "categoryIds" => [
+                9
+            ],
+            "children" => 0,
+            "dateFrom" => "2023-02-10 06:00:00",
+            "dateTo" => "2023-02-10 06:30:00",
+            "infants" => 0,
+            "propertyId" => 1
+        ];
+
+
+    }
+
+    function property_rates(){
+
+    }
+
     function update_listing()
     {
 
