@@ -43,8 +43,10 @@ jQuery(document).ready( ()=> {
                         console.log("Please wait")
                     })
                 }).done((resp) => {
+                console.log(resp)
+                return false
                     let response = JSON.parse(resp)
-                    console.log(resp)
+
                     if (response.status  === "Confirmed") {
                         alert("Reservation Book Successfully")
                         e.returnValue = true

@@ -1,6 +1,5 @@
 <?php
 
-
 add_action( 'admin_menu', 'yoodule_admin_menu' );
 if (!function_exists('yoodule_admin_menu')) {
     function yoodule_admin_menu() {
@@ -91,18 +90,26 @@ if( !function_exists("yd_import_rooms") ) {
         }
         if (isset($_POST["submit"])){
 
-            $secret = $_POST["stripe-secret"];
-            $client = $_POST["stripe-client"];
+            $data = [
 
-            if (!get_option("stripe_api_stripe") && !get_option("stripe_api_client")){
-                add_option( 'stripe_api_client' , $client , '' , 'no');
-                add_option( 'stripe_api_secret' , $secret , '' , 'no');
-                add_action('admin_notices', 'insert_notice');
-            }else {
-                update_option( 'stripe_api_client' , $client );
-                update_option( 'stripe_api_secret' , $secret );
+                "rms_agent_id"=>$_POST["rms-agent-id"],
+                "rms_client_id"=>$_POST["rms-client-id"],
+                "rms_client_password"=>$_POST["rms-client-password"],
+                "rms_agent_password"=>$_POST["rms-agent-password"],
+                "rms_use_training_database"=>$_POST["rms_agent_id"],
+                "rms_module_type"=>$_POST["rms-module-type"],
+                "rms_token"=>$_POST["rms-module-type"],
+                "rms_mode"=>$_POST["rms-mode"],
+            ];
+
+
+
+            foreach ($data as $key => $str):
+                update_option( $key, $str );
+
+            endforeach;
                 add_action('admin_notices', 'update_notice');
-            }
+
 
         }
 
