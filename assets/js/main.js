@@ -21,16 +21,15 @@ function serializeObject(obj) {
         }
     });
     return jsn;
-};
+}
+
 
 let $=jQuery;
 
-
-
 jQuery(document).ready( ()=> {
 
-    if (basename(window.location.href) === "booking-confirmation" ) {
-        $('.button').on('click', (e) => {
+
+        $('input[name="saveorder"]').on('click', (e) => {
           let data =  $("form").serializeArray();
             let formData = serializeObject(data)
             console.log(formData)
@@ -45,8 +44,7 @@ jQuery(document).ready( ()=> {
                     })
                 }).done((resp) => {
                     let response = JSON.parse(resp)
-                    console.log(response)
-                    let cf = "Confirmed";
+                    console.log(resp)
                     if (response.status  === "Confirmed") {
                         alert("Reservation Book Successfully")
                         e.returnValue = true
@@ -61,6 +59,5 @@ jQuery(document).ready( ()=> {
                 })
 
         })
-    }
 
 })

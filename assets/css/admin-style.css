@@ -3,5 +3,20 @@
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    height: 90vh;
+}
+
+
+.input-row {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: start;
+    padding: 10px;
+}
+
+.yd-header {
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
 }
