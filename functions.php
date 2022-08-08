@@ -139,19 +139,16 @@ class YooduleListImportExport extends options
                      $catTable = $wpdb->prefix . "vikbooking_categories";
                      $catName = $arr["categoryClass"];
                      if (!is_user_logged_in() && !is_user_admin()) {
-                         return false;
+                        wp_die( "Not Allowed");
                      } else {
-                         $row = $wpdb->get_results("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '$catTable' AND column_name = 'catId'");
-
-                         if (empty($row)) {
-                             $wpdb->query("ALTER TABLE $catTable ADD catId INT(1) NOT NULL DEFAULT 0 ");
+                         $check_cat = $wpdb->query("select * from $catTable where name = '$catName'");
+                         if (!empty($check_cat)) {
                              continue;
                          } else {
+                             $row = $wpdb->get_results("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '$catTable' AND column_name = 'catId'");
 
-                             $check_cat = $wpdb->query("select * from $catTable where name = '$catName'");
-                             if (!empty($check_cat)) {
-                                 continue;
-                             } else {
+                             if (empty($row)) {
+                                 $wpdb->query("ALTER TABLE $catTable ADD catId INT(1) NOT NULL DEFAULT 0 ");
                                  $cat_id = $wpdb->insert($catTable,
                                      [
                                          "name" => $arr["categoryClass"],
@@ -168,12 +165,13 @@ class YooduleListImportExport extends options
 
                                      ], ["propsId" => $arr["propertyId"]]);
 
-                                     return  true;
+                                     return true;
                                  }
 
                              }
                          }
                      }
+
              endforeach;
 
 
@@ -229,30 +227,36 @@ class YooduleListImportExport extends options
 
             $roomsTable = $wpdb->prefix.'vikbooking_rooms';
             $name = $arr['name'];
-             $row = $wpdb->get_results(  "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '$roomsTable' AND column_name = 'propsId'"  );
-                if(empty($row)){
-                    $wpdb->query("ALTER TABLE $roomsTable ADD propsId INT(1) NOT NULL DEFAULT 0  AFTER idcat");
-                    break;
-                }  else {
+
+
                     $check = $wpdb->query("select * from $roomsTable where name = '$name'");
                     if (!empty($check)){
                        continue;
                     }else {
+                        $row = $wpdb->get_results(  "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '$roomsTable' AND column_name = 'propsId'"  );
+                        if(empty($row)){
+                            $wpdb->query("ALTER TABLE $roomsTable ADD propsId INT(1) NOT NULL DEFAULT 0  AFTER idcat");
+                            continue;
+                        }
 
                         $wpdb->insert($roomsTable,
                             [
-
                                 'propsId' => $arr["id"],
                                 'name' => $arr["name"],
                                 'alias' => sanitize_title($arr["name"]),
                             ]);
                         if ($wpdb->insert_id) {
 
-                            add_action('init',[$this,'import_categories']);
-                            add_action('admin_notices',[$this,'_success_notice']);
+                            add_action('init', [$this, 'import_categories']);
+                            add_action('admin_notices', [$this, '_success_notice']);
+
+                            echo "
+                            <script>
+                            alert('Imported')
+                            </script>
+                            ";
                         }
-                }
-            }
+                    }
             endfor;
         }
 
